@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
-using MvcCoreTest.Models;
+using MvcCoreTest.Entities;
 
 namespace MvcCoreTest.Services
 {

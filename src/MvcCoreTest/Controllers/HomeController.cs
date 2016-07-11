@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MvcCoreTest.Models;
 using MvcCoreTest.Services;
 
 namespace MvcCoreTest.Controllers

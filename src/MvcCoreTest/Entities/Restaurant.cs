@@ -1,4 +1,4 @@
-﻿namespace MvcCoreTest.Models
+﻿namespace MvcCoreTest.Entities
 {
     public class Restaurant
     {
