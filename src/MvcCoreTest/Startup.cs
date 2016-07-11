@@ -2,12 +2,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvcCoreTest.Services;
-using Microsoft.AspNet.Diagnostics;
-using Microsoft.AspNet.Builder.Extensions;
 
 namespace MvcCoreTest
 {
@@ -27,7 +26,8 @@ namespace MvcCoreTest
         {
             services
                 .AddSingleton(provider => Configuration)
-                .AddSingleton<IGreeter,Greeter>();
+                .AddSingleton<IGreeter,Greeter>()
+                .AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,9 +41,24 @@ namespace MvcCoreTest
                 app.UseDeveloperExceptionPage();
             }
 
+            /// The order in which middleware is added
+            /// decides which middleware gets a chance
+            /// to handle an incoming request first.
+
+            // These don't work. I think app.UseIISIntegration()
+            // was moved, but app.UseRuntimeInfoPage() is gone.
             //app.UseIISIntegration();
-            //app.Use();
-            app.UseStaticFiles();
+            //app.UseRuntimeInfoPage();
+
+            // app.UseDefaultFiles() needs to come 
+            // before app.UseStaticFiles().
+
+            //app.UseDefaultFiles();
+            //app.UseStaticFiles();
+
+            app.UseFileServer();
+            //app.UseMvcWithDefaultRoute();
+            app.UseMvc(ConfigureRoute);
 
             app.Run(async (context) =>
             {
@@ -51,6 +66,14 @@ namespace MvcCoreTest
                 //await context.Response.WriteAsync(Configuration["greeting"]);
                 await context.Response.WriteAsync(greeter.GetGreeting());
             });
+        }
+
+        private void ConfigureRoute(IRouteBuilder routeBuilder)
+        {
+            // Ex: /Home/Index/
+            // =Home, =Index tells it what to use 
+            // when nothing is passed.
+            routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}");
         }
     }
 }
