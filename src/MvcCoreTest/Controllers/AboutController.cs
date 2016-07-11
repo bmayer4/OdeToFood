@@ -2,17 +2,17 @@
 
 namespace MvcCoreTest.Controllers
 {
-    //[Route("[controller]")]
-    [Route("company/[controller]/[action]")]
+    [Route("[controller]")]
+    //[Route("company/[controller]/[action]")]
     public class AboutController
     {
-        //[Route("")]
+        [Route("")]
         public string Phone()
         {
             return "1-555-555-1212";
         }
 
-        //[Route("[action]")]
+        [Route("[action]")]
         public string Country()
         {
             return "USA";
