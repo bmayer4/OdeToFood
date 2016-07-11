@@ -1,10 +1,20 @@
-﻿namespace MvcCoreTest.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+using MvcCoreTest.Models;
+
+namespace MvcCoreTest.Controllers
 {
-    public class HomeController
+    public class HomeController : Controller
     {
-        public string Index()
+        public IActionResult Index()
         {
-            return "Hello, from a controller!";
+            //this.HttpContext.
+            //this.File()
+            //return Content("Hello, from a controller!");
+
+            var model = new Restaurant {Id = 1, Name = "Bailey's"};
+            // The result automatically serializes
+            // to JSON!
+            return new ObjectResult(model);
         }
     }
 }
