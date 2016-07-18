@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
-@using MvcCoreTest.Entities
+@using MvcCoreTest.ViewModels
 
-@model IEnumerable<Restaurant>
+@model HomePageViewModel
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,11 +9,12 @@
 </head>
 <body>
 <h1>This is the home page</h1>
+<h3>@Model.CurrentGreeting</h3>
 <div>
     <table>
-        @foreach (var r in Model)
+        @foreach (var r in Model.Restaurants)
         {
-            <tr><td>@r.Id</td><td>@r.Name</td></tr>
+            <tr><td>@Html.ActionLink(r.Name, "Details", new { id = r.Id })</td></tr>
         }
     </table>
 </div>
