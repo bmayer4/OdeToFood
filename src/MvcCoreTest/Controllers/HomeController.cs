@@ -50,15 +50,20 @@ namespace MvcCoreTest.Controllers
         }
 
         [HttpPost]
-        public ViewResult Create(RestaurantEditViewModel model)
+        public IActionResult Create(RestaurantEditViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             var r = new Restaurant();
             r.Name = model.Name;
             r.Cuisine = model.Cuisine;
 
             _restaurantData.Add(r);
 
-            return View("Details", r);
+            return RedirectToAction("Details", new {id = r.Id});
         }
     }
 }

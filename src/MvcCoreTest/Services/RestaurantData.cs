@@ -35,6 +35,7 @@ namespace MvcCoreTest.Services
         public void Add(Restaurant restaurant)
         {
             restaurant.Id = _restaurants.Max(r => r.Id) + 1;
+            _restaurants.Add(restaurant);
         }
 
         static readonly ConcurrentBag<Restaurant> _restaurants;
