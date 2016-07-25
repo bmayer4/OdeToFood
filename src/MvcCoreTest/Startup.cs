@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvcCoreTest.Entities;
 using MvcCoreTest.Services;
 
 namespace MvcCoreTest
@@ -24,7 +27,18 @@ namespace MvcCoreTest
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // Originally this code changed the
+            // service configuration together using 
+            // fluent API calls but that caused configuration
+            // errors. 
             services.AddMvc();
+
+            services.AddEntityFramework();
+            services.AddEntityFrameworkSqlServer();
+            services.AddDbContext<OdeToFoodDbContext>(options => options.UseSqlServer(Configuration["database:connection"]));
+
+
+
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();
             services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
