@@ -1,0 +1,21 @@
+﻿@using System
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+<header>
+    <h1>Welcome Header!</h1>
+    @RenderSection("header", false)
+</header>
+<div>
+    @RenderBody()
+</div>
+<footer>
+    @RenderSection("footer",false)
+</footer>
+</body>
+</html>

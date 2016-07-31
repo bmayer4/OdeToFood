@@ -1,14 +1,9 @@
-﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
-@using MvcCoreTest.Entities
+﻿@model Restaurant
+@{
+    ViewData["Title"] = "New Restaurant";
+}
 
-@model Restaurant
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>New Restaurant</title>
-</head>
-<body>
-<h1>New Restaurant</h1>
+        <h1>New Restaurant</h1>
     @using (Html.BeginForm())
     {
         <div>
@@ -25,6 +20,3 @@
             <input type="submit" value="Save"/>
         </div>
     }
-
-</body>
-</html>

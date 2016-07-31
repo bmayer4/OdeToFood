@@ -20,7 +20,7 @@
       "type": "build",
       "version": "1.0.0-preview2-final"
 
-    }
+    } 
   },
 
   "_comment": "http://stackoverflow.com/questions/38306791/add-migration-fails-because-entityframeworkcore-tools-is-not-installed",
