@@ -25,7 +25,11 @@ namespace MvcCoreTest.Services
         public void Add(Restaurant restaurant)
         {
             _ctx.Add(restaurant);
-            _ctx.SaveChanges();
+        }
+
+        public int Commit()
+        {
+            return _ctx.SaveChanges();
         }
     }
 }

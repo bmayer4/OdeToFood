@@ -32,6 +32,11 @@ namespace MvcCoreTest.Services
             _restaurants.Add(restaurant);
         }
 
+        public int Commit()
+        {
+            return 0;
+        }
+
         static readonly ConcurrentBag<Restaurant> _restaurants;
     }
 }

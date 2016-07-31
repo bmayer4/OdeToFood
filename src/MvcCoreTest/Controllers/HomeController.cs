@@ -23,7 +23,6 @@ namespace MvcCoreTest.Controllers
 
             var model = new HomePageViewModel();
             model.Restaurants = _restaurantData.GetAll();
-            model.CurrentGreeting = _greeter.GetGreeting();
             
             // The result automatically serializes
             // to JSON!
@@ -41,6 +40,36 @@ namespace MvcCoreTest.Controllers
             }
 
             return View(restaurant);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var restaurant = _restaurantData.Get(id);
+
+            if (restaurant == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(restaurant);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, RestaurantEditViewModel model)
+        {
+            var r = _restaurantData.Get(id);
+
+            if (r == null && !ModelState.IsValid)
+            {
+                return View();
+            }
+
+            r.Name = model.Name;
+            r.Cuisine = model.Cuisine;
+            _restaurantData.Commit();
+
+            return RedirectToAction("Details", new { id = r.Id });
         }
 
         [HttpGet]
@@ -62,7 +91,7 @@ namespace MvcCoreTest.Controllers
             r.Cuisine = model.Cuisine;
 
             _restaurantData.Add(r);
-
+            _restaurantData.Commit();
             return RedirectToAction("Details", new {id = r.Id});
         }
     }

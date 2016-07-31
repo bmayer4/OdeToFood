@@ -4,20 +4,15 @@
     ViewData["Title"] = "Home";
 }
 
-<h1>This is the home page</h1>
-<table>
-    @foreach (var r in Model.Restaurants)
-    {
-        <tr>
-            <td>@r.Name</td>
-            <td><a asp-action="Details" asp-route-id="@r.Id">Details</a></td>
-        </tr>
-    }
-</table>
+<h1>Welcome to the restaurant list</h1>
 
-<!-- asp-controller="Home" is optional when calling an action on the same controller.  -->
-<a asp-controller="Home" asp-action="Create">Create</a>
-
-@section footer {
-    <div>@Model.CurrentGreeting</div>
+@foreach (var r in Model.Restaurants)
+{
+    @Html.Partial("_Summary", r);
 }
+
+
+<div>
+    <!-- asp-controller="Home" is optional when calling an action on the same controller.  -->
+    <a asp-controller="Home" asp-action="Create">Create</a>    
+</div>
