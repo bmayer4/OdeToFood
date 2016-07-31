@@ -7,6 +7,7 @@ namespace MvcCoreTest.Controllers
 {
     public class HomeController : Controller
     {
+        // comment to force push of new branch.
         private IRestaurantData _restaurantData;
         private IGreeter _greeter;
 
