@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -37,7 +38,8 @@ namespace MvcCoreTest
             services.AddEntityFrameworkSqlServer();
             services.AddDbContext<OdeToFoodDbContext>(options => options.UseSqlServer(Configuration["database:connection"]));
 
-
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<OdeToFoodDbContext>();
 
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();
@@ -72,13 +74,13 @@ namespace MvcCoreTest
             //app.UseStaticFiles();
 
             app.UseFileServer();
-            //app.UseMvcWithDefaultRoute();
+
+            app.UseIdentity();
+
             app.UseMvc(ConfigureRoute);
 
             app.Run(async (context) =>
             {
-                //throw new Exception("test");
-                //await context.Response.WriteAsync(Configuration["greeting"]);
                 await context.Response.WriteAsync(greeter.GetGreeting());
             });
         }
