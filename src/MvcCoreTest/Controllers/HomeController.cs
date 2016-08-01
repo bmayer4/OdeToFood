@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MvcCoreTest.Entities;
 using MvcCoreTest.Services;
 using MvcCoreTest.ViewModels;
 
 namespace MvcCoreTest.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         // comment to force push of new branch.
@@ -16,6 +18,7 @@ namespace MvcCoreTest.Controllers
             _restaurantData = restaurantData;
             _greeter = greeter;
         }
+        [AllowAnonymous]
         public IActionResult Index()
         {
             //this.HttpContext.

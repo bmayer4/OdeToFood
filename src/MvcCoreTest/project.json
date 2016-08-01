@@ -19,8 +19,8 @@
     "Microsoft.EntityFrameworkCore.Design": {
       "type": "build",
       "version": "1.0.0-preview2-final"
-
-    } 
+    },
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0"
   },
 
   "_comment": "http://stackoverflow.com/questions/38306791/add-migration-fails-because-entityframeworkcore-tools-is-not-installed",
