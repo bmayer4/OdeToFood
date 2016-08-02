@@ -75,9 +75,12 @@ namespace MvcCoreTest
 
             app.UseFileServer();
 
+            // Located in /Middleware/ApplicationBuilderExtensions.cs
+            app.UseNodeModules(env);
+
             app.UseIdentity();
 
-            app.UseMvc(ConfigureRoute);
+            app.UseMvc(ConfigureRoute); 
 
             app.Run(async (context) =>
             {
