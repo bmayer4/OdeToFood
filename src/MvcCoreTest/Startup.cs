@@ -77,7 +77,7 @@ namespace MvcCoreTest
 
             app.UseIdentity();
 
-            app.UseMvc(ConfigureRoute);
+            app.UseMvc(ConfigureRoute); 
 
             app.Run(async (context) =>
             {
